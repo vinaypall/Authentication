@@ -1,9 +1,11 @@
+const { name } = require("ejs");
 const express= require("express");
 const router = express.Router();
 
-router.get("/",async(req,res)=>{
+router.get("/",async (req,res)=>{
   return res.render("home.ejs");
 })
+
 
 router.get("/signup",(req,res)=>{
     res.render("SignUp.ejs");
