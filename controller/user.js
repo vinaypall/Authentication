@@ -13,6 +13,7 @@ async function handleUserSignUp(req,res) {
     });
     return res.redirect("/");
 }
+
 async function handleLogin(req,res) {
     const {email,password} = req.body;
     const user = await User.findOne({
@@ -21,13 +22,12 @@ async function handleLogin(req,res) {
     });
     if(!user){
         return res.render("login.ejs",{
-            error:"Invalid  or password"
+            error:"Invalid email or password"
         })
     }
-    // create a session Id
-    const sessionId = uuidv4();
-    setUser(sessionId,user);
-    res.cookie("uid",sessionId);
+
+   const token = setUser(user);
+    res.cookie("uid",token);
     return res.redirect("/");
 }
 
